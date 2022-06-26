@@ -6,13 +6,15 @@ import com.thomas.wishlist.exception.CourseNotFoundException;
 import java.util.List;
 
 public interface CourseService {
-    Course saveCourse(Course course);
+    Course createCourse(Course course);
+
+    Course findById(Integer courseId) throws CourseNotFoundException;
 
     Course updateCourse(Course course, Integer courseId) throws CourseNotFoundException;
 
     List<Course> findAllCourse();
 
-    Course findById(Integer courseId) throws CourseNotFoundException;
+    boolean deleteCourseById(Integer courseId) throws CourseNotFoundException;
 
-    boolean deleteCourse(Integer courseId) throws CourseNotFoundException;
+    boolean deleteCourseByName(String name) throws CourseNotFoundException;
 }

@@ -22,7 +22,7 @@ public class CourseServiceImpl implements CourseService {
     private TechnologyRepository technologyRepository;
 
     @Override
-    public Course saveCourse(Course course) {
+    public Course createCourse(Course course) {
         if (course.getTechnologyId() != null) {
             Optional<Technology> technology = this.technologyRepository
                     .findById(course.getTechnologyId().getTechnologyId());
@@ -31,6 +31,12 @@ public class CourseServiceImpl implements CourseService {
             }
         }
         return this.courseRepository.save(course);
+    }
+
+    @Override
+    public Course findById(Integer courseId) throws CourseNotFoundException {
+        return this.courseRepository.findById(courseId)
+                .orElseThrow(() -> new CourseNotFoundException(courseId));
     }
 
     @Override
@@ -49,16 +55,18 @@ public class CourseServiceImpl implements CourseService {
     }
 
     @Override
-    public Course findById(Integer courseId) throws CourseNotFoundException {
-        return this.courseRepository.findById(courseId)
-                .orElseThrow(() -> new CourseNotFoundException(courseId));
-    }
-
-    @Override
-    public boolean deleteCourse(Integer courseId) throws CourseNotFoundException {
+    public boolean deleteCourseById(Integer courseId) throws CourseNotFoundException {
         return this.courseRepository.findById(courseId).map(tempCourse -> {
             this.courseRepository.delete(tempCourse);
             return true;
         }).orElseThrow(() -> new CourseNotFoundException(courseId));
+    }
+
+    @Override
+    public boolean deleteCourseByName(String courseName) throws CourseNotFoundException {
+        return this.courseRepository.findByName(courseName).map(tempCourse -> {
+            this.courseRepository.delete(tempCourse);
+            return true;
+        }).orElseThrow(() -> new CourseNotFoundException("No record found for department " + courseName));
     }
 }

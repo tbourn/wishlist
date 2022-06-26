@@ -9,5 +9,4 @@ public interface TechnologyRepository extends JpaRepository<Technology, Integer>
 
     Optional<Technology> findByName(String name);
 
-//    Optional<Technology> deleteByName(String name);
 }

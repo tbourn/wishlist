@@ -26,11 +26,11 @@ public class TechnologyServiceImpl implements TechnologyService {
                 .orElseThrow(() -> new TechnologyNotFoundException("Could not find department " + technologyId));
     }
 
-    @Override
-    public Technology findByName(String technologyName) throws TechnologyNotFoundException {
-        return technologyRepository.findByName(technologyName)
-                .orElseThrow(() -> new TechnologyNotFoundException("Technology Not Found with technologyName:" + technologyName));
-    }
+//    @Override
+//    public Technology findByName(String technologyName) throws TechnologyNotFoundException {
+//        return technologyRepository.findByName(technologyName)
+//                .orElseThrow(() -> new TechnologyNotFoundException("Technology Not Found with technologyName:" + technologyName));
+//    }
 
     @Override
     public Technology updateTechnology(Technology technology, Integer technologyId) throws TechnologyNotFoundException {

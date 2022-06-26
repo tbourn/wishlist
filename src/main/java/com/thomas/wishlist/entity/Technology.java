@@ -2,6 +2,7 @@ package com.thomas.wishlist.entity;
 
 import lombok.*;
 
+import javax.annotation.PostConstruct;
 import javax.persistence.*;
 import java.util.List;
 
@@ -28,8 +29,16 @@ public class Technology {
     @ToString.Exclude
     private List<Course> courses;
 
-//    public Technology(String name) {
-//        this.name = name;
-//    }
+    @Transient
+    private double avg = 0.0;
+
+    @PostConstruct
+    public double getTechnologyAvg() {
+        for (Course course : this.courses) {
+            this.avg += course.getCompletionPercentage();
+        }
+
+        return this.avg / this.courses.size();
+    }
 
 }

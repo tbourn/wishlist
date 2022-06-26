@@ -30,8 +30,4 @@ public class Course {
     @JoinColumn(name = "technology_id")
     private Technology technologyId;
 
-//    public Course(@NonNull String name, @NonNull double completionPercentage) {
-//        this.name = name;
-//        this.completionPercentage = completionPercentage;
-//    }
 }
