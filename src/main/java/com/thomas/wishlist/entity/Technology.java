@@ -41,4 +41,14 @@ public class Technology {
         return this.avg / this.courses.size();
     }
 
+//    public void addCourse(Course course) {
+//        courses.add(course);
+//        course.setTechnologyId(this);
+//    }
+//
+//    public void removeCourse(Course course) {
+//        courses.remove(course);
+//        course.setTechnologyId(null);
+//    }
+
 }

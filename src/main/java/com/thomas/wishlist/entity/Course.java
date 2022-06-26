@@ -3,6 +3,7 @@ package com.thomas.wishlist.entity;
 import lombok.*;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "course")
@@ -11,6 +12,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @RequiredArgsConstructor
 @ToString
+//@EqualsAndHashCode
 public class Course {
 
     @Id
@@ -26,8 +28,13 @@ public class Course {
     @Column(name = "completion_percentage")
     double completionPercentage;
 
+//    @ManyToOne(fetch = FetchType.LAZY,
+//            cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
+//    @JoinColumn(name = "technology_id", nullable = false)
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
     @JoinColumn(name = "technology_id")
+    @NotNull(message = "Technology has to be present")
+    @ToString.Exclude
     private Technology technologyId;
 
 }

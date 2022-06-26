@@ -9,7 +9,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/api")
@@ -25,7 +24,8 @@ public class CourseController {
 
     // endpoint: create a new Course under a specific Technology
     @PostMapping("/courses")
-    public ResponseEntity<Course> createCourse(@Valid @RequestBody Course course) {
+    public ResponseEntity<?> createCourse(@Valid @RequestBody Course course) {
+        System.err.println(course);
         return new ResponseEntity<>(this.courseService.createCourse(course), HttpStatus.CREATED);
     }
 
@@ -43,13 +43,13 @@ public class CourseController {
 
     // endpoint: Retrieve a Course based on its Name
     @GetMapping("/courses/name")
-    public ResponseEntity<Optional<?>> getCourseByName(@RequestParam String name) {
+    public ResponseEntity<?> getCourseByName(@RequestParam String name) {
         return new ResponseEntity<>(courseRepository.findByName(name), HttpStatus.OK);
     }
 
     // endpoint: update an existing Course
     @PutMapping("courses/{id}")
-    public ResponseEntity<Course> updateCourse(@Valid @RequestBody Course course, @PathVariable Integer id)
+    public ResponseEntity<?> updateCourse(@Valid @RequestBody Course course, @PathVariable Integer id)
             throws CourseNotFoundException {
         return new ResponseEntity<>(this.courseService.updateCourse(course, id), HttpStatus.OK);
     }
